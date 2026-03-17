@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  # ----------------------------------------
+  # 1. 流量入口层 (02-Network / 05-Nginx)
+  # ----------------------------------------
+  nginx:
+    image: nginx:latest
+    container_name: ops_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/html:/usr/share/nginx/html
+    depends_on:
+      - backend_api
+    restart: always
+
+  # ----------------------------------------
+  # 2. 业务逻辑层 (模拟 Tomcat/业务容器)
+  # ----------------------------------------
+  backend_api:
+    image: python:3.9-slim
+    container_name: ops_backend
+    # 用 Python 内置 http server 模拟一个极其简单的后端响应服务
+    command: python -m http.server 8080 --directory /app
+    volumes:
+      - ./app:/app
+    expose:
+      - "8080"
+    restart: always
+
+  # ----------------------------------------
+  # 3. 缓存加速层 (07-Redis)
+  # ----------------------------------------
+  redis_cache:
+    image: redis:7
+    container_name: ops_redis
+    command: redis-server --requirepass "OpsSec123!" --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: always
+
+  # ----------------------------------------
+  # 4. 数据持久层 (03-MySQL)
+  # ----------------------------------------
+  mysql_db:
+    image: mysql:5.7
+    container_name: ops_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "OpsRootPassword2026@"
+      MYSQL_DATABASE: "ops_combat_db"
+      MYSQL_USER: "ops_user"
+      MYSQL_PASSWORD: "OpsUser2026@"
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: always
+
+volumes:
+  mysql_data:
+  redis_data:

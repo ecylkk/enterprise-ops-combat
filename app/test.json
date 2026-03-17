@@ -1,0 +1,5 @@
+{
+  "status": 200,
+  "msg": "Hello from backend container!",
+  "architecture": "Nginx -> Backend API -> Redis/MySQL"
+}
