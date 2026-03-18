@@ -2,6 +2,8 @@
 
 This project demonstrates a high-availability, cloud-native microservice architecture designed for enterprise-grade stability and performance.
 
+**🚀 Live Demo:** [https://enterprise-ops-combat.onrender.com/](https://enterprise-ops-combat.onrender.com/)
+
 ## 🏗️ System Architecture
 The system employs a multi-layered approach to ensure scalability and fault tolerance:
 - **Edge Layer**: Nginx Reverse Proxy for traffic orchestration and SSL termination.
