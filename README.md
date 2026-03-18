@@ -1,27 +1,30 @@
-# 企业级全链路高可用微服务架构实战 (综合 01-08 知识点)
+# 🌐 Global Ops Management System (Enterprise HA Architecture)
 
-## 🎯 项目背景与商业价值
-**业务场景**：一个面向高并发的“跨境电商抢购系统” / “数字游民社区论坛”。
-**商业价值**：
-1. **防宕机（高可用）**：Nginx 负载均衡 + Docker Restart 策略保证服务不死。
-2. **防超卖（高并发）**：引入 Redis 作为第一道防线，阻挡直接穿透 MySQL 的流量。
-3. **数据安全（最终一致）**：MySQL 事务+索引优化，保证核心订单或金钱数据不乱。
-4. **自动化与可观测**：一键部署脚本 + 监控看板，节省运维人力，快速感知“502/504”故障。
+This project demonstrates a high-availability, cloud-native microservice architecture designed for enterprise-grade stability and performance.
 
-## 🗺️ 知识点闭环映射表
+## 🏗️ System Architecture
+The system employs a multi-layered approach to ensure scalability and fault tolerance:
+- **Edge Layer**: Nginx Reverse Proxy for traffic orchestration and SSL termination.
+- **Application Layer**: Python-based microservice architecture.
+- **Cache Layer**: Redis in-memory storage for high-frequency data access.
+- **Data Layer**: MySQL with advanced indexing for consistent persistence.
 
-| 路线图章节 | 在本项目中的具体运用（你的面试弹药） |
-| :--- | :--- |
-| **01-Linux** | 编写 `deploy.sh` 自动化部署与发版脚本，利用原生 Shell 替代人工重复劳动。 |
-| **02-Network** | Nginx 处理 HTTP 流量入口，并向后挂载内网端口；排查 502/504 故障。 |
-| **03-MySQL** | 设计带有正确索引（Index）的业务表，模拟事务操作保证核心数据 ACID。 |
-| **04-Docker** | 全盘容器化！把所有组件写进 `docker-compose.yml` 实现真正的一键拉起。 |
-| **05-Nginx/Tomcat** | 配置 Nginx 反向代理（Proxy_pass）到后端容器，实现内外网业务隔离。 |
-| **07-Redis/CICD** | 增加 Redis 缓存容器化部署，模拟热点数据存储防击穿；`deploy.sh` 作为简易 CI/CD 落地。 |
-| **08-Project** | 将这套打通的拓扑直接写入你的终极实战项目简历，用顶级视角回答面试。 |
+## 🚀 Key SRE & DevOps Features
+- **Zero-Downtime CI/CD**: Fully automated delivery pipeline via GitHub Actions and Render.
+- **High Availability**: Container orchestration with Docker Compose for local development and cloud-native scaling.
+- **Performance Optimization**: 
+  - Database indexing strategies to prevent full table scans.
+  - Redis caching to mitigate database load under high concurrency.
+- **Fault Tolerance**: Designed to handle 502/504 scenarios with automated health checks and recovery scripts.
 
-## 🚀 如何运行这个项目？
+## 🛠️ Tech Stack
+| Component | Technology | Role |
+| :--- | :--- | :--- |
+| Gateway | Nginx | Reverse Proxy & Load Balancing |
+| Backend | Python 3.9 | Microservice Logic |
+| Cache | Redis | High-Speed Data Access |
+| Database | MySQL 8.0 | Optimized Persistence |
+| CI/CD | GitHub / Render | Automated Deployment |
 
-1. 进入当前目录。
-2. 运行部署脚本：`bash scripts/deploy.sh`
-3. 观察容器是否正常拉起：`docker-compose ps`
+---
+*Created for the enterprise combat simulation by DYsensei.*

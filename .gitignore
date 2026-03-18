@@ -1,0 +1,12 @@
+# Docker
+.dockerignore
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Sensitive data
+.env

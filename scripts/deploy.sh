@@ -18,21 +18,25 @@ mkdir -p nginx/html app
 cat << 'EOF' > nginx/html/index.html
 <!DOCTYPE html>
 <html>
-<head><meta charset="utf-8"><title>Ops Combat Portal</title></head>
+<head><meta charset="utf-8"><title>Global Ops Monitoring</title></head>
 <body style="font-family: Arial; text-align: center; margin-top: 50px;">
-    <h1>🔥 企业级云原生架构实战基地</h1>
-    <p>Nginx 已经成功把门防守！</p>
-    <a href="/api/test.json">点击测试穿透到后端的API请求</a>
+    <h1>🌐 Global Ops Management System</h1>
+    <p>Status: <span style="color: #28a745;">● Operational</span></p>
+    <a href="test.json" style="padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">View System Metrics</a>
 </body>
 </html>
 EOF
 
 # 模拟后端接口响应数据
+# 模拟业务指标响应数据
 cat << 'EOF' > app/test.json
 {
-  "status": 200,
-  "msg": "Hello from backend container!",
-  "architecture": "Nginx -> Backend API -> Redis/MySQL"
+  "system_status": "Operational",
+  "node_uptime": "99.98%",
+  "active_sessions": 1242,
+  "db_latency_ms": 15,
+  "cache_hit_rate": "89.4%",
+  "region": "Singapore-Az-1"
 }
 EOF
 
