@@ -21,8 +21,8 @@
                 <div style="font-size: 1.8em; font-weight: bold; margin-top: 5px; color: #28a745;">ACTIVE</div>
             </div>
             <div style="background: #fdf2f2; padding: 20px; border-radius: 10px; flex: 1; margin: 0 10px;">
-                <div style="font-size: 0.9em; color: #dc3545; font-weight: bold;">LATENCY (MS)</div>
-                <div style="font-size: 1.8em; font-weight: bold; margin-top: 5px;">14ms</div>
+                <div style="font-size: 0.9em; color: #dc3545; font-weight: bold;">LATENCY (AVG)</div>
+                <div id="latency" style="font-size: 1.8em; font-weight: bold; margin-top: 5px;">14.0ms</div>
             </div>
             <div style="background: #f0fdf4; padding: 20px; border-radius: 10px; flex: 1; margin: 0 10px;">
                 <div style="font-size: 0.9em; color: #28a745; font-weight: bold;">UPTIME</div>
@@ -74,7 +74,25 @@
     </div>
 
     <script>
-        document.getElementById('time').innerText = new Date().toUTCString();
+        // Update ticking clock
+        function updateClock() {
+            document.getElementById('time').innerText = new Date().toUTCString();
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Simulate real-time metric jitter
+        setInterval(() => {
+            const latencyEl = document.getElementById('latency');
+            const baseLatency = 14.0;
+            const jitter = (Math.random() * 2 - 1).toFixed(1);
+            latencyEl.innerText = (baseLatency + parseFloat(jitter)).toFixed(1) + 'ms';
+
+            // Subtle flash effect on update
+            latencyEl.style.transition = 'color 0.2s';
+            latencyEl.style.color = '#dc3545';
+            setTimeout(() => { latencyEl.style.color = '#1c1e21'; }, 200);
+        }, 3000);
     </script>
 </body>
 
