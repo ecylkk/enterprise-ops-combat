@@ -29,4 +29,3 @@ The system employs a multi-layered approach to ensure scalability and fault tole
 | CI/CD | GitHub / Render | Automated Deployment |
 
 ---
-*Created for the enterprise combat simulation by DYsensei.*
