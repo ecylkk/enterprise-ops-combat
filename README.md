@@ -28,4 +28,4 @@ The system employs a multi-layered approach to ensure scalability and fault tole
 | Database | MySQL 8.0 | Optimized Persistence |
 | CI/CD | GitHub / Render | Automated Deployment |
 
----
+
